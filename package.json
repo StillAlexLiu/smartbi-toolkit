@@ -16,6 +16,10 @@
       "import": "./dist/SmartbiToolkit.es.js",
       "types": "./dist/index.d.ts"
     },
+    "./VitePluginSmartbi": {
+      "import": "./dist/VitePluginSmartbi.es.js",
+      "types": "./dist/vite-plugin-smartbi/index.d.ts"
+    },
     "./AnalysisReportService": {
       "import": "./dist/AnalysisReportService.es.js",
       "types": "./dist/methods/AnalysisReportService.d.ts"
@@ -132,12 +136,14 @@
     "preview": "vite preview"
   },
   "files": [
-    "dist"
+    "dist",
+    "base"
   ],
   "devDependencies": {
     "typescript": "~5.9.3",
     "vite": "8.0.0-beta.8",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "@types/node": "^25.0.9"
   },
   "dependencies": {
     "axios": "^1.13.2"

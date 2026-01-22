@@ -1,14 +1,21 @@
 import {defineConfig} from "vite";
 import dts from 'vite-plugin-dts'
+import VitePluginSmartbi from './src/vite-plugin-smartbi'
+// import VitePluginSmartbi from 'smartbi-toolkit/VitePluginSmartbi'
 
 export default defineConfig({
     base: './',
-    plugins: [dts()],
+    plugins: [dts(),
+        VitePluginSmartbi({
+            name: '测试插件'
+        })
+    ],
     build: {
         minify: true,
         lib: {
             entry: {
                 SmartbiToolkit: './src/index.ts',
+                VitePluginSmartbi: './src/vite-plugin-smartbi/index.ts',
                 CatalogService: './src/methods/CatalogService.ts',
                 AnalysisReportService: './src/methods/AnalysisReportService.ts',
                 BusinessThemeService: './src/methods/BusinessThemeService.ts',
@@ -42,8 +49,14 @@ export default defineConfig({
             formats: ['es'],
             fileName: (format: string, entryName: string) => `${entryName}.${format}.js`,
         },
+        rollupOptions: {
+            external: [
+                'axios',
+            ]
+        },
         rolldownOptions: {
-            external: ['axios'],
+            external: ['axios', 'node', 'vite'
+            ],
         }
     },
     server: {
