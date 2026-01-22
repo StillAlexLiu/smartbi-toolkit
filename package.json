@@ -1,0 +1,41 @@
+{
+  "name": "smartbi-toolkit",
+  "private": false,
+  "version": "1.0.1",
+  "keys": [
+    "smartbi",
+    "扩展包",
+    "ext",
+    "typescript"
+  ],
+  "type": "module",
+  "module": "./dist/SmartbiToolkit.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/SmartbiToolkit.es.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./CatalogService": {
+      "import": "./dist/CatalogService.es.js",
+      "types": "./dist/methods/CatalogService.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "b": "tsc",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "8.0.0-beta.8",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
+}
