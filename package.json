@@ -16,9 +16,113 @@
       "import": "./dist/SmartbiToolkit.es.js",
       "types": "./dist/index.d.ts"
     },
+    "./AnalysisReportService": {
+      "import": "./dist/AnalysisReportService.es.js",
+      "types": "./dist/methods/AnalysisReportService.d.ts"
+    },
+    "./BusinessThemeService": {
+      "import": "./dist/BusinessThemeService.es.js",
+      "types": "./dist/methods/BusinessThemeService.d.ts"
+    },
+    "./BusinessViewService": {
+      "import": "./dist/BusinessViewService.es.js",
+      "types": "./dist/methods/BusinessViewService.d.ts"
+    },
     "./CatalogService": {
       "import": "./dist/CatalogService.es.js",
       "types": "./dist/methods/CatalogService.d.ts"
+    },
+    "./ClientCombinedReportService": {
+      "import": "./dist/ClientCombinedReportService.es.js",
+      "types": "./dist/methods/ClientCombinedReportService.d.ts"
+    },
+    "./ClientInsightService": {
+      "import": "./dist/ClientInsightService.es.js",
+      "types": "./dist/methods/ClientInsightService.d.ts"
+    },
+    "./ClientReportService": {
+      "import": "./dist/ClientReportService.es.js",
+      "types": "./dist/methods/ClientReportService.d.ts"
+    },
+    "./CombinedReportService": {
+      "import": "./dist/CombinedReportService.es.js",
+      "types": "./dist/methods/CombinedReportService.d.ts"
+    },
+    "./DataSourceService": {
+      "import": "./dist/DataSourceService.es.js",
+      "types": "./dist/methods/DataSourceService.d.ts"
+    },
+    "./GraphicReportService": {
+      "import": "./dist/GraphicReportService.es.js",
+      "types": "./dist/methods/GraphicReportService.d.ts"
+    },
+    "./InsightReport": {
+      "import": "./dist/InsightReport.es.js",
+      "types": "./dist/methods/InsightReport.d.ts"
+    },
+    "./MetadataService": {
+      "import": "./dist/MetadataService.es.js",
+      "types": "./dist/methods/MetadataService.d.ts"
+    },
+    "./OfficeReport": {
+      "import": "./dist/OfficeReport.es.js",
+      "types": "./dist/methods/OfficeReport.d.ts"
+    },
+    "./OfficeReportService": {
+      "import": "./dist/OfficeReportService.es.js",
+      "types": "./dist/methods/OfficeReportService.d.ts"
+    },
+    "./OltpMetadataService": {
+      "import": "./dist/OltpMetadataService.es.js",
+      "types": "./dist/methods/OltpMetadataService.d.ts"
+    },
+    "./ParameterService": {
+      "import": "./dist/ParameterService.es.js",
+      "types": "./dist/methods/ParameterService.d.ts"
+    },
+    "./PoolService": {
+      "import": "./dist/PoolService.es.js",
+      "types": "./dist/methods/PoolService.d.ts"
+    },
+    "./PortalService": {
+      "import": "./dist/PortalService.es.js",
+      "types": "./dist/methods/PortalService.d.ts"
+    },
+    "./Report": {
+      "import": "./dist/Report.es.js",
+      "types": "./dist/methods/Report.d.ts"
+    },
+    "./SSReport": {
+      "import": "./dist/SSReport.es.js",
+      "types": "./dist/methods/SSReport.d.ts"
+    },
+    "./ScheduleTaskService": {
+      "import": "./dist/ScheduleTaskService.es.js",
+      "types": "./dist/methods/ScheduleTaskService.d.ts"
+    },
+    "./SimpleReportService": {
+      "import": "./dist/SimpleReportService.es.js",
+      "types": "./dist/methods/SimpleReportService.d.ts"
+    },
+    "./SpreadSheetReportService": {
+      "import": "./dist/SpreadSheetReportService.es.js",
+      "types": "./dist/methods/SpreadSheetReportService.d.ts"
+    },
+    "./SystemConfigService": {
+      "import": "./dist/SystemConfigService.es.js",
+      "types": "./dist/methods/SystemConfigService.d.ts"
+    },
+    "./TimeConsuming": {
+      "import": "./dist/TimeConsuming.es.js",
+      "types": "./dist/methods/TimeConsuming.d.ts"
+    },
+    "./TimeConsumingService": {
+      "import": "./dist/TimeConsumingService.es.js",
+      "types": "./dist/methods/TimeConsumingService.d.ts"
+    },
+    "./UserManagerService": {
+      "import": "./dist/UserManagerService.es.js",
+      "types": "./dist/methods/UserManagerService.d.ts"
     }
   },
   "scripts": {
