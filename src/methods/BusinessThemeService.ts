@@ -1,4 +1,4 @@
-import {smartbi} from '../index.ts';
+import {smartbi} from '../index';
 
 /**
  * 创建业务对象

@@ -1,6 +1,6 @@
 // 定义SmartBI简单报表服务相关的类型接口
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 创建并打开一个报表

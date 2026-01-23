@@ -1,7 +1,7 @@
 // 导入公共类型
 import type {BasicField, DataSource, DriverType, JDBCTable, SDKGridData} from '../types';
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 创建数据源

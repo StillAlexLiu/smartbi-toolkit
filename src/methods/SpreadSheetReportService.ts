@@ -1,6 +1,6 @@
 // 导入公共类型
 import type {NameValuePair} from '../types';
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 打开电子表格报表

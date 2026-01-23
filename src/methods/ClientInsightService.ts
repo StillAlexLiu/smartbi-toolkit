@@ -1,6 +1,6 @@
 // 导入公共类型
 import type {NameValuePair, ReportData, SystemConfig} from '../types';
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 清空透视分析临时表

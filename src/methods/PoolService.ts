@@ -1,6 +1,6 @@
 // 定义SmartBI连接池服务相关的类型接口
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 清除所有连接池

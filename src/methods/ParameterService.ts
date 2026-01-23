@@ -1,6 +1,6 @@
 // 定义SmartBI参数服务相关的类型接口
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 根据参数ID获取参数默认值SQL语句

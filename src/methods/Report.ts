@@ -1,6 +1,6 @@
 // 导入公共类型
 import type {CustomFilterDataBean, ReportData, ReportExportType, RunningInfo} from '../types';
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 取得当前报表名

@@ -8,7 +8,7 @@ import type {
     ReportData
 } from '../types';
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 打开一个报表

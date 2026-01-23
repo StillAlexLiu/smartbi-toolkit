@@ -3,7 +3,7 @@ import type { ICombinedReport } from '../types';
 
 // CombinedReportService 服务方法
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 创建并打开一个报表

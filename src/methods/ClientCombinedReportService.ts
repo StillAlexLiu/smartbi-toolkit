@@ -3,7 +3,7 @@ import type { IClientCombinedReportView } from '../types';
 
 // ClientCombinedReportService 服务方法
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 打开一个即席查询报表

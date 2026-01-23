@@ -1,5 +1,5 @@
 // 导入公共类型
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 打开图形分析报表

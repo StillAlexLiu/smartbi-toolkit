@@ -1,5 +1,5 @@
-import {setSmartbiEnv} from './index.ts'
-import {getRootElements} from './methods/CatalogService.ts'
+import {setSmartbiEnv} from './index'
+import {getRootElements} from './methods/CatalogService'
 
 setSmartbiEnv({
     dev: {

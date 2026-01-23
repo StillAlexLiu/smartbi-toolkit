@@ -1,6 +1,6 @@
 // 定义SmartBI计划任务服务相关的类型接口
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 执行计划任务

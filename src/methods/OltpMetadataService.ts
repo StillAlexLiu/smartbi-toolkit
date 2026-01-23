@@ -1,6 +1,6 @@
 // 导入公共类型
 import type { CalcField, TableField, DataSource } from '../types';
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 获取计算字段对象的基本信息

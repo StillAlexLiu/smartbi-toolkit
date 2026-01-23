@@ -14,7 +14,7 @@ export interface SystemConfig {
     [key: string]: any;
 }
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 获取系统设置

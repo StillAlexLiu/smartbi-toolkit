@@ -1,5 +1,5 @@
 // 导入公共类型
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 获取执行时间信息

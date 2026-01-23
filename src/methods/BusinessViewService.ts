@@ -1,7 +1,7 @@
 // 导入公共类型
 import type {FieldProperty, ViewMetaData} from '../types';
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 根据数据集（可视化查询、原生SQL查询、SQL查询）的ID查询其SQL语句

@@ -66,7 +66,7 @@ export const executeQuery = (clientId: string): Promise<IResult> => {
  */
 export const doExport = (
     clientId: string,
-    exportType: keyof AllExportTypeMap| string,
+    exportType: keyof AllExportTypeMap | string,
     delimiter: string,
     os: any, // 输出流
     resourceBasePath?: string,
@@ -150,4 +150,4 @@ export const getExecutingState = (clientId: string): Promise<RunningInfo> => {
     return smartbi('AnalysisReportService', 'getExecutingState', [clientId])
 }
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";

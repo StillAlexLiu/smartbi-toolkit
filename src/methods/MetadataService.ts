@@ -1,7 +1,7 @@
 // 导入公共类型
 import type { IDocument, DocumentTreeNode, CategoryResource } from '../types';
 
-import { smartbi } from "../index.ts";
+import { smartbi } from "../index";
 
 /**
  * 搜索被引用的资源(影响性分析)

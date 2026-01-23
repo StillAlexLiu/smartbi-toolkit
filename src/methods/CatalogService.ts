@@ -11,7 +11,7 @@ import type {
     PermissionType
 } from '../types';
 
-import {smartbi} from "../index.ts";
+import {smartbi} from "../index";
 
 /**
  * 判断某个资源是否可访问。

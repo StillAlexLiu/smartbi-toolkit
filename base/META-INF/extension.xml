@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE extension SYSTEM "extension.dtd">
-<extension name="___$$$name" alias="___$$$alias" desc="___$$$desc" priority="80" version="1.0" depends="workflow">
-    <enable-jsp-processor />
-</extension>
