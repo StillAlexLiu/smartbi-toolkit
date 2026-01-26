@@ -7,7 +7,7 @@
     "扩展包",
     "ext",
     "typescript",
-    "smartbi-toolkit",
+    "smartbi-toolkit"
   ],
   "type": "module",
   "module": "./dist/index.js",
