@@ -36,6 +36,9 @@ jobs:
 
       - run: bun install
       - run: bun run build
+      - run: npm whoami
+      - run: npm config get //registry.npmjs.org/:_authToken
+      - run: npm token listå
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
