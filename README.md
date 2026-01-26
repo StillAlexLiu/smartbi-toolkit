@@ -3,6 +3,11 @@
 * 可用于第三方系统上使用smartbi接口服务，封装了常用接口
 * 扩展包构建工具封装 （todo）
 
+### 安装
+```
+npm i smartbi-toolkit
+```
+
 ### 在smartbi-toolkit中封装了通用的请求方法
 
 * smartbi方法,RMI方法调用封装

@@ -3,10 +3,10 @@ import type {
     AccessType,
     CatalogElementType,
     HiddenInBrowse,
-    ICatalogElement,
+    CatalogElement,
     ICatalogSearchResult,
-    IResourcePermission,
-    IResourcePermissionItem,
+    ResourcePermission,
+    ResourcePermissionItem,
     PermissionDescendType,
     PermissionType
 } from '../types';
@@ -31,18 +31,18 @@ export const isCatalogElementAccessible = (elementId: string, type: AccessType):
 
 /**
  * 获取资源树的顶层节点列表
- * @returns 返回顶层节点列表，节点类型为ICatalogElement
+ * @returns 返回顶层节点列表，节点类型为CatalogElement
  */
-export const getRootElements = (): Promise<ICatalogElement[]> => {
+export const getRootElements = (): Promise<CatalogElement[]> => {
     return smartbi('CatalogService', 'getRootElements', [])
 }
 
 /**
  * 获得指定节点的子节点列表
  * @param nodeId 指定节点ID
- * @returns 返回子节点列表，节点类型为ICatalogElement
+ * @returns 返回子节点列表，节点类型为CatalogElement
  */
-export const getChildElements = (nodeId: string): Promise<ICatalogElement[]> => {
+export const getChildElements = (nodeId: string): Promise<CatalogElement[]> => {
     return smartbi('CatalogService', 'getChildElements', [nodeId])
 }
 
@@ -54,7 +54,7 @@ export const getChildElements = (nodeId: string): Promise<ICatalogElement[]> => 
  * @param desc 目录描述
  * @param type 目录类型,此项可为空,系统会自动根据父目录的类型进行设置
  * @param hiddenInBrowse 是否在浏览模块中隐藏此目录
- * @returns 返回创建的目录对象，类型为ICatalogElement
+ * @returns 返回创建的目录对象，类型为CatalogElement
  */
 export const createFolder = (
     parentNodeId: string,
@@ -63,7 +63,7 @@ export const createFolder = (
     desc: string,
     type: CatalogElementType | string,
     hiddenInBrowse: HiddenInBrowse
-): Promise<ICatalogElement> => {
+): Promise<CatalogElement> => {
     return smartbi('CatalogService', 'createFolder', [parentNodeId, name, alias, desc, type, hiddenInBrowse])
 }
 
@@ -76,7 +76,7 @@ export const createFolder = (
  * @param desc 目录描述
  * @param type 目录类型,此项可为空,系统会自动根据父目录的类型进行设置
  * @param hiddenInBrowse 是否在浏览模块中隐藏此目录
- * @returns 返回创建的目录对象，类型为ICatalogElement
+ * @returns 返回创建的目录对象，类型为CatalogElement
  */
 export const createFolderById = (
     parentNodeId: string,
@@ -86,25 +86,25 @@ export const createFolderById = (
     desc: string,
     type: CatalogElementType | string,
     hiddenInBrowse: HiddenInBrowse
-): Promise<ICatalogElement> => {
+): Promise<CatalogElement> => {
     return smartbi('CatalogService', 'createFolderById', [parentNodeId, id, name, alias, desc, type, hiddenInBrowse])
 }
 
 /**
  * 通过ID访问资源
  * @param elementId 资源ID
- * @returns 返回资源对象，类型为ICatalogElement
+ * @returns 返回资源对象，类型为CatalogElement
  */
-export const getCatalogElementById = (elementId: string): Promise<ICatalogElement> => {
+export const getCatalogElementById = (elementId: string): Promise<CatalogElement> => {
     return smartbi('CatalogService', 'getCatalogElementById', [elementId])
 }
 
 /**
  * 通过类型获取结点
  * @param type 节点类型
- * @returns 返回指定类型的节点列表，节点类型为ICatalogElement
+ * @returns 返回指定类型的节点列表，节点类型为CatalogElement
  */
-export const getCatalogElementByType = (type: CatalogElementType | string): Promise<ICatalogElement[]> => {
+export const getCatalogElementByType = (type: CatalogElementType | string): Promise<CatalogElement[]> => {
     return smartbi('CatalogService', 'getCatalogElementByType', [type])
 }
 
@@ -112,27 +112,27 @@ export const getCatalogElementByType = (type: CatalogElementType | string): Prom
  * 获取目录下指定类型的子元素
  * @param parentNodeId 父节点ID
  * @param types 要获取的子元素类型数组
- * @returns 返回指定类型的子元素列表，节点类型为ICatalogElement
+ * @returns 返回指定类型的子元素列表，节点类型为CatalogElement
  */
-export const getChildElementsByTypes = (parentNodeId: string, types: (CatalogElementType | string)[]): Promise<ICatalogElement[]> => {
+export const getChildElementsByTypes = (parentNodeId: string, types: (CatalogElementType | string)[]): Promise<CatalogElement[]> => {
     return smartbi('CatalogService', 'getChildElementsByTypes', [parentNodeId, types.toString()])
 }
 
 /**
  * 获取资源直接被授予的权限信息
  * @param resId 资源ID
- * @returns 返回资源直接被授予的权限信息，类型为IResourcePermission
+ * @returns 返回资源直接被授予的权限信息，类型为ResourcePermission
  */
-export const getAssignedPermissions = (resId: string): Promise<IResourcePermission> => {
+export const getAssignedPermissions = (resId: string): Promise<ResourcePermission> => {
     return smartbi('CatalogService', 'getAssignedPermissions', [resId])
 }
 
 /**
  * 获取资源继承的权限信息
  * @param resId 资源ID
- * @returns 返回资源继承的权限信息列表，类型为IResourcePermissionItem[]
+ * @returns 返回资源继承的权限信息列表，类型为ResourcePermissionItem[]
  */
-export const getInheritedPermissions = (resId: string): Promise<IResourcePermissionItem[]> => {
+export const getInheritedPermissions = (resId: string): Promise<ResourcePermissionItem[]> => {
     return smartbi('CatalogService', 'getInheritedPermissions', [resId])
 }
 
@@ -148,10 +148,10 @@ export const deleteCatalogElement = (id: string): Promise<void> => {
 /**
  * 根据别名或名称模糊查询资源信息
  * @param alias 别名或名称关键字
- * @param purview 权限范围
+ * @param purview "READ"："查看"； "WRITE"："编辑"； "REF"："引用"
  * @returns 返回搜索结果列表，类型为ICatalogSearchResult[]
  */
-export const searchCatalogElementLikeAlias = (alias: string, purview: string): Promise<ICatalogSearchResult[]> => {
+export const searchCatalogElementLikeAlias = (alias: string, purview: AccessType): Promise<ICatalogSearchResult[]> => {
     return smartbi('CatalogService', 'searchCatalogElementLikeAlias', [alias, purview])
 }
 
@@ -227,8 +227,8 @@ export const updateCatalogElementImage = (id: string, image: string): Promise<vo
 /**
  * 根据ID修改资源信息
  * @param id 资源ID
- * @param jsonNodeConfig JSON节点配置
- * @param wholeExtended 完整扩展信息
+ * @param jsonNodeConfig JSON节点配置 资源定义，json字符串，格式如下： "{\"alias\":\"复选框_报表2\",\"desc\":\"复选框_报表2\",\"deletedExtKeys\":\"hasChild,detectChild\",\"extended\":\"{'customImage':'Foldera.jpg','hiddenInBrowse':'false'}\"}" alias: 可选属性，别名 desc: 可选属性，描述 deletedExtKeys：可选属性，需要删除的扩展属性的key，参数内容可以不包含该属性 extended：可选属性，需要新增或修改的扩展属性内容，参数内容可以不包含该属性
+ * @param wholeExtended 完整的扩展内容，json字符串，格式如下：{"extended": "{\"hasChild\":\"false\",\"hiddenInBrowse\":\"false\"}"}。 该参数内容可为空。如不为空，扩展字段内容将全部替换为该参数内容，否则只对扩展属性进行增量添加。
  * @returns 无返回值
  */
 export const updateCatalogNode = (id: string, jsonNodeConfig: string, wholeExtended: string): Promise<void> => {
@@ -242,7 +242,10 @@ export const updateCatalogNode = (id: string, jsonNodeConfig: string, wholeExten
  * @param urlAlias URL别名
  * @param urlDesc URL描述
  * @param url URL地址
- * @param setting 设置参数
+ * @param setting  设置是否新窗口打开以及是否传递登录信息
+ * 设置在当前窗口打开设置如下: {"currentWindow":true}
+ * 设置在当前窗口打开并传递登录信息设置如下: {"currentWindow":true,"autoLogin":true}
+ * 如果此值设置为空，则系统会默认为在新窗口打开并不传递登录信息
  * @returns 返回新创建的URL链接ID
  */
 export const createURLLink = (
@@ -258,11 +261,14 @@ export const createURLLink = (
 
 /**
  * 更新WEB链接
- * @param urlID URL ID
+ * @param urlID 结点ID
  * @param urlAlias URL别名
  * @param urlDesc URL描述
  * @param url URL地址
- * @param setting 设置参数
+ * @param setting   设置是否新窗口打开以及是否传递登录信息
+ * 设置在当前窗口打开设置如下: {"currentWindow":true}
+ * 设置在当前窗口打开并传递登录信息设置如下: {"currentWindow":true,"autoLogin":true}
+ * 如果此值设置为空，则系统会默认为在新窗口打开并不传递登录信
  * @returns 无返回值
  */
 export const updateURLLink = (
@@ -304,7 +310,7 @@ export const copyAndPasteReturnNewId = (
  * @param desc 描述
  * @param order 顺序
  * @param type 类型
- * @returns 返回创建的资源节点，类型为ICatalogElement
+ * @returns 返回创建的资源节点，类型为CatalogElement
  */
 export const createCatalogElement = (
     parentId: string,
@@ -314,6 +320,6 @@ export const createCatalogElement = (
     desc: string,
     order: number,
     type: CatalogElementType | string
-): Promise<ICatalogElement> => {
+): Promise<CatalogElement> => {
     return smartbi('CatalogService', 'createCatalogElement', [parentId, id, name, alias, desc, order, type])
 }

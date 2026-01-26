@@ -1,5 +1,5 @@
 // 导入公共类型
-import type {FieldProperty, ViewMetaData} from '../types';
+import type {PropertyName, ViewMetaData} from '../types';
 
 import {smartbi} from "../index";
 
@@ -156,7 +156,7 @@ export const updateRawSqlQueryBusinessView = (
 export const setOutputFieldInfo = (
     businessViewClientId: string,
     fieldId: string,
-    propertyName: FieldProperty,
+    propertyName: PropertyName,
     propertyValue: string
 ): Promise<void> => {
     return smartbi('BusinessViewService', 'setOutputFieldInfo', [businessViewClientId, fieldId, propertyName, propertyValue])

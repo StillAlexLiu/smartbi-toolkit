@@ -11,25 +11,14 @@ import { smartbi } from "../index";
  * @param desc 描述
  * @param password 密码
  * @param isEnabled 是否启用
+ * @param forceChangePassword 是否强制修改密码(可选)
  * @returns 返回新创建的用户ID
  */
-export const createUser = (parentGroupId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean): Promise<string> => {
-    return smartbi('UserManagerService', 'createUser', [parentGroupId, userName, userAlias, desc, password, isEnabled])
-}
-
-/**
- * 创建用户（带强制修改密码选项）
- * @param parentGroupId 父组ID
- * @param userName 用户名
- * @param userAlias 用户别名
- * @param desc 描述
- * @param password 密码
- * @param isEnabled 是否启用
- * @param forceChangePassword 是否强制修改密码
- * @returns 返回新创建的用户ID
- */
-export const createUserWithForceChangePassword = (parentGroupId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean, forceChangePassword: boolean): Promise<string> => {
-    return smartbi('UserManagerService', 'createUser', [parentGroupId, userName, userAlias, desc, password, isEnabled, forceChangePassword])
+export const createUser = (parentGroupId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean, forceChangePassword?: boolean): Promise<string> => {
+    const params = forceChangePassword !== undefined 
+        ? [parentGroupId, userName, userAlias, desc, password, isEnabled, forceChangePassword]
+        : [parentGroupId, userName, userAlias, desc, password, isEnabled];
+    return smartbi('UserManagerService', 'createUser', params);
 }
 
 /**
@@ -41,24 +30,13 @@ export const createUserWithForceChangePassword = (parentGroupId: string, userNam
  * @param desc 描述
  * @param password 密码
  * @param isEnabled 是否启用
+ * @param forceChangePassword 是否强制修改密码(可选)
  */
-export const createUserById = (parentGroupId: string, userId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean): Promise<void> => {
-    return smartbi('UserManagerService', 'createUserById', [parentGroupId, userId, userName, userAlias, desc, password, isEnabled])
-}
-
-/**
- * 指定ID创建用户（带强制修改密码选项）
- * @param parentGroupId 父组ID
- * @param userId 用户ID
- * @param userName 用户名
- * @param userAlias 用户别名
- * @param desc 描述
- * @param password 密码
- * @param isEnabled 是否启用
- * @param forceChangePassword 是否强制修改密码
- */
-export const createUserByIdWithForceChangePassword = (parentGroupId: string, userId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean, forceChangePassword: boolean): Promise<void> => {
-    return smartbi('UserManagerService', 'createUserById', [parentGroupId, userId, userName, userAlias, desc, password, isEnabled, forceChangePassword])
+export const createUserById = (parentGroupId: string, userId: string, userName: string, userAlias: string, desc: string, password: string, isEnabled: boolean, forceChangePassword?: boolean): Promise<void> => {
+    const params = forceChangePassword !== undefined 
+        ? [parentGroupId, userId, userName, userAlias, desc, password, isEnabled, forceChangePassword]
+        : [parentGroupId, userId, userName, userAlias, desc, password, isEnabled];
+    return smartbi('UserManagerService', 'createUserById', params);
 }
 
 /**

@@ -2,37 +2,47 @@
 // 通用接口类型
 export interface IResult {
     // 查询结果接口，具体字段取决于实际返回值
+    cells: Array<any>
+    axes: Array<any>
+
     [key: string]: any;
 }
 
+export interface RunningInfoItem {
+    name: string;      // 名称
+    startTime: number;  // 开始时间
+    cost: number;       // 耗时
+}
+
 export interface RunningInfo {
-    // 执行状态信息接口
-    state: string; // 执行状态
-    progress: number; // 执行进度
-    // 其他可能的属性
-    [key: string]: any;
+    currentItem: RunningInfoItem;           // 当前项
+    currentItemFinished: boolean;           // 当前项是否已完成
+    allItems: RunningInfoItem[];            // 所有项列表
+    asyncInfos: RunningInfo[];              // 异步信息列表
+    resId?: string;                         // 资源ID
+    startTime: number;                      // 开始时间
+    isFinished: boolean;                    // 是否已完成
 }
 
 export interface IParameter {
     // 参数接口
     id: string;
     name: string;
-    value: string;
-    displayValue: string;
 
     // 其他可能的属性
     [key: string]: any;
 }
 
 export interface Parameter {
-    // 参数接口（另一种形式）
-    id: string;
-    name: string;
-    value: string;
-    displayValue: string;
-
-    // 其他可能的属性
-    [key: string]: any;
+    id: string;              // ID
+    name: string;            // 名称
+    alias?: string;          // 别名
+    desc?: string;           // 描述
+    type?: string;           // 类型
+    defaultValue?: string;   // 默认值
+    componentType?: string;  // 组件类型
+    displayValue?: string;   // 显示值
+    value?: string;          // 值
 }
 
 export interface NameValuePair {
@@ -46,33 +56,16 @@ export interface NameValuePair {
 
 // 业务视图相关类型
 export interface ViewMetaData {
-    // 业务查询的基本元数据信息
-    id: string;
-    name: string;
-    alias: string;
-    description?: string;
-    datasourceId: string;
-    sql: string;
-
-    // 其他可能的属性
-    [key: string]: any;
+    clientId?: string;           // 客户端ID
+    totalRowCount: number;       // 总行数
+    fieldNames: string[];        // 字段名称列表
+    fieldTypes: string[];        // 字段类型列表
 }
 
-export interface OutputField {
-    id: string;
-    name: string;
-    alias: string;
-    description?: string;
-    dataType: string;
-    dataFormat?: string;
 
-    // 其他可能的属性
-    [key: string]: any;
-}
+export type PropertyName = 'alias' | 'desc' | 'dataType' | 'dataFormat' | 'orderby' | 'transformRule';
 
-export type FieldProperty = 'alias' | 'desc' | 'dataType' | 'dataFormat' | 'orderby' | 'transformRule';
-
-export const FieldProperty = {
+export const PropertyName = {
     ALIAS: 'alias',
     DESC: 'desc',
     DATA_TYPE: 'dataType',
@@ -90,50 +83,47 @@ export const BusinessViewType = {
 };
 
 // 目录服务相关类型
-export interface ICatalogElement {
-    id: string;
-    name: string;
-    alias: string;
-    description?: string;
-    type: string;
-    parentId?: string;
-    children?: ICatalogElement[];
-    createTime?: Date;
-    updateTime?: Date;
-
+export interface CatalogElement {
+    id: string;                    // 资源ID
+    name: string;                  // 资源名称
+    alias: string;                 // 别名
+    desc?: string;                 // 描述（可选）
+    type: string;                  // 资源类型
+    hasChild: boolean;             // 是否有子节点
+    order: number;                 // 顺序
+    extended?: string;             // 扩展信息（可选）
+    hiddenInBrowse: boolean;       // 是否在浏览模块中隐藏
+    showOnPC: boolean;             // 是否在PC端显示
+    showOnPad: boolean;            // 是否在平板端显示
+    showOnPhone: boolean;          // 是否在手机端显示
+    customImage?: string;          // 自定义图片（可选）
+    customMobileImage?: string;    // 自定义移动图片（可选）
+    mobileImageId?: string;        // 移动图片ID（可选）
+    detectChild: boolean;          // 是否检测子节点
+    lastModifiedDate?: Date;       // 最后修改日期（可选）
+    fullPath?: string;             // 完整路径（可选，默认为""）
+    parentId?: string;             // 父节点ID（可选，默认为null）
     // 其他可能的属性
     [key: string]: any;
 }
 
-export interface IResourcePermission {
-    resourceId: string;
-    permissions: string[];
-    grantedBy: string;
-    grantTime: Date;
-
-    // 其他可能的属性
-    [key: string]: any;
-}
-
-export interface IResourcePermissionItem {
-    itemId: string;
-    itemName: string;
-    permissionType: string;
+export interface ResourcePermission {
+    permissions: ResourcePermissionItem[];
     inherited: boolean;
+    owner: IAssignee;
+    resid: string;
 
     // 其他可能的属性
     [key: string]: any;
 }
+
 
 export interface ICatalogSearchResult {
-    id: string;
-    name: string;
-    alias: string;
-    type: string;
-    parentId: string;
-    score: number; // 搜索匹配度
-    // 其他可能的属性
-    [key: string]: any;
+
+    catalogElement?: any; // ICatalogElement类型
+    idPath?: string[]; // 路径ID列表
+    aliasPath?: string[]; // 别名路径列表
+
 }
 
 // 访问类型定义
@@ -248,63 +238,54 @@ export const CatalogElementType = {
     OLD_DATASET: 'OLD_DATASET'                // 旧数据集
 };
 
+// Assignee 类型定义
+export interface IAssignee {
+    id: string;
+    name: string;
+    alias: string;
+    type: string;
+}
+
+// ResourcePermissionItem 类型定义
+export interface ResourcePermissionItem {
+    assignee: IAssignee;
+    purviewType: string;
+    permissionApplyToScope: string;
+    groupDescend: boolean;
+    id: string;
+    fromresid: string;
+    expiresTime: string;
+    sourceUser?: any;
+}
+
 // 权限类型定义
-export type PermissionType = 'REF' | 'READ' | 'WRITE';
+export type PermissionType = 'NONE' | 'REF' | 'READ' | 'WRITE' | 'OVERVIEW' | 'GRANT'
 
-export const PermissionType = {
-    REF: 'REF',
-    READ: 'READ',
-    WRITE: 'WRITE'
-};
 
-export type PermissionDescendType = 'ALL' | 'NONE' | 'READ_WRITE';
+export type PermissionDescendType = 'NONE' | 'FOLDER_ONLY' | 'FILE_ONLY' | 'FOLDER_FILE';
 
-export const PermissionDescendType = {
-    ALL: 'ALL',
-    NONE: 'NONE',
-    READ_WRITE: 'READ_WRITE'
-};
 
 export type HiddenInBrowse = boolean;
 
 // 客户端组合报表相关类型
-export interface IClientCombinedReportView {
-    clientId: string;
-    reportBean?: any;
+export interface IClientCombinedReportView extends ClientReportView {
     queryClientId?: string;
-    reportClientId?: string;
     condPanelClientId?: string;
     paramPanelId?: string;
 }
 
 // 客户端报表服务相关类型
 export interface ReportData {
-    id: string;
-    name: string;
-    alias?: string;
-    data: any[]; // 报表数据
-    totalRows: number; // 总行数
-    currentPage: number; // 当前页码
-    rowsPerPage: number; // 每页行数
-    // 其他可能的属性
-    [key: string]: any;
-}
-
-export interface ClientReportView {
-    id: string;
-    name: string;
-    alias?: string;
-    clientId: string;
-    reportId: string;
-
-    // 其他可能的属性
-    [key: string]: any;
+    matrix: any[][];
 }
 
 export interface CustomFilterDataBean {
-    id: string;
-    name: string;
-    condition: string;
+    fieldId: string;      // 字段ID
+    operator1: string;    // 操作符1
+    value1: string;       // 值1
+    groupType: string;    // 组类型
+    operator2?: string;   // 操作符2（可选）
+    value2?: string;      // 值2（可选）
 
     // 其他可能的属性
     [key: string]: any;
@@ -319,53 +300,18 @@ export type AggregateType =
     | 'AVG'         // 平均值
     | 'NULL';       // 无聚合
 
-export const AggregateType = {
-    SUM: 'SUM',
-    MIN: 'MIN',
-    MAX: 'MAX',
-    COUNT: 'COUNT',
-    DISTINCT_COUNT: 'DISTINCT_COUNT',
-    AVG: 'AVG',
-    NULL: 'NULL'
-};
 
 export type OrderType =
     | 'ASC'         // 升序
     | 'DESC'        // 降序
     | 'NONE';       // 无排序
 
-export const OrderType = {
-    ASC: 'ASC',
-    DESC: 'DESC',
-    NONE: 'NONE'
-};
 
 export type OperatorType =
-    | 'EQ'          // 等于
-    | 'NE'          // 不等于
-    | 'GT'          // 大于
-    | 'GE'          // 大于等于
-    | 'LT'          // 小于
-    | 'LE'          // 小于等于
-    | 'LIKE'        // 模糊匹配
-    | 'IN'          // 包含
-    | 'NOT_IN'      // 不包含
-    | 'IS_NULL'     // 为空
-    | 'NOT_NULL';   // 不为空
+    | '='
+    | '>'
+    | '<'
 
-export const OperatorType = {
-    EQ: 'EQ',
-    NE: 'NE',
-    GT: 'GT',
-    GE: 'GE',
-    LT: 'LT',
-    LE: 'LE',
-    LIKE: 'LIKE',
-    IN: 'IN',
-    NOT_IN: 'NOT_IN',
-    IS_NULL: 'IS_NULL',
-    NOT_NULL: 'NOT_NULL'
-};
 
 // 数据源服务相关类型
 export interface DataSource {
@@ -375,19 +321,17 @@ export interface DataSource {
     desc?: string;
     user: string;
     password?: string;
-    driverType: string;
+    driverType: DriverType | string;
     driver: string;
     url: string;
     maxConnection: number;
     dbCharset?: string;
     validationQuery?: string;
-    transactionIsolation?: number;
-    validationQueryMethod?: number;
+    transactionIsolation: number; // 默认值为-1
+    validationQueryMethod: number;
     authenticationType?: string;
     driverCatalog?: string;
 
-    // 其他可能的属性
-    [key: string]: any;
 }
 
 export type JDBCTableType =
@@ -396,12 +340,6 @@ export type JDBCTableType =
     | 'PROC'
     | 'MACRO';
 
-export const JDBCTableType = {
-    TABLE: 'TABLE',
-    VIEW: 'VIEW',
-    PROC: 'PROC',
-    MACRO: 'MACRO'
-};
 
 export interface JDBCTable {
     catalog?: string;
@@ -410,8 +348,6 @@ export interface JDBCTable {
     desc?: string;
     type: JDBCTableType;
 
-    // 其他可能的属性
-    [key: string]: any;
 }
 
 export interface BasicField {
@@ -422,8 +358,6 @@ export interface BasicField {
     dataType: string;
     dataFormat?: string;
 
-    // 其他可能的属性
-    [key: string]: any;
 }
 
 export interface SDKCellData {
@@ -435,13 +369,12 @@ export interface SDKCellData {
     doubleValue?: number;
     dateValue?: Date;
     longValue?: number;
-    byteArrayValue?: Uint8Array; // equivalent to byte[]
+    byteArrayValue?: Uint8Array | string | string[]; // equivalent to byte[]
     extendValue?: string;
     useTransformRule?: boolean;
     bigIntValue?: bigint;
     bigDecimalValue?: number; // Using number as JS doesn't have BigDecimal
     // 其他可能的属性
-    [key: string]: any;
 }
 
 export interface SDKGridData {
@@ -451,8 +384,6 @@ export interface SDKGridData {
     columnLabels?: string[];
     data?: SDKCellData[][];
 
-    // 其他可能的属性
-    [key: string]: any;
 }
 
 // DriverType 类型定义
@@ -475,60 +406,48 @@ export type DriverType =
     | 'GREENPLUM'     // Greenplum数据库
     | 'DEFAULT';      // 其它类型数据库
 
-// DriverType 常量对象
-export const DriverType = {
-    KINGBASE: 'KINGBASE',        // kingbase数据库
-    ODBC: 'ODBC',                // odbc连接方式
-    MSSQL: 'MSSQL',              // Ms SQL Server数据库
-    MYSQL: 'MYSQL',              // Mysql数据库
-    ORACLE: 'ORACLE',            // Oracle数据库
-    DB2_400: 'DB2_400',          // DB2数据库
-    DB2: 'DB2',                  // DB2数据库
-    DB2_V9: 'DB2_V9',            // DB2_V9数据库
-    INFORMIX: 'INFORMIX',        // Informix数据库
-    SYBASE: 'SYBASE',            // Sybase数据库
-    TERADATA: 'TERADATA',        // Teradata数据库
-    TERADATA_V12: 'TERADATA_V12',// Teradata_v12数据库
-    ACCESS: 'ACCESS',            // Access数据库
-    EXCEL: 'EXCEL',              // Excel
-    POSTGRESQL: 'POSTGRESQL',    // PostgreSQL数据库
-    GREENPLUM: 'GREENPLUM',      // Greenplum数据库
-    DEFAULT: 'DEFAULT'           // 其它类型数据库
-};
 
-// 洞察分析相关类型
+// 系统配置相关类型
 export interface SystemConfig {
-    id: string;
-    name: string;
+    key: string;
     value: string;
-    desc?: string;
+    longValue?: string;
 
     // 其他可能的属性
     [key: string]: any;
 }
 
-export interface InsightConfig {
-    // 洞察配置接口
-    [key: string]: any;
-}
 
 // 元数据服务相关类型
 export interface IDocument {
     id: string;
     name: string;
+    alias?: string;
+    cnAlias?: string;
+    enAlias?: string;
+    twAlias?: string;
+    desc?: string;
+    cnDesc?: string;
+    enDesc?: string;
+    twDesc?: string;
     type: string;
-    parentId?: string;
+    path?: string;
+    content?: string;
+    refid?: string[];
+    affid?: string[];
+    flag?: string;
+    docOrder?: number;
+    lastModified?: string;
+    indexLastModified?: string;
+    extended?: string;
 
     // 其他可能的属性
     [key: string]: any;
 }
 
-export interface DocumentTreeNode {
-    id: string;
-    name: string;
-    type: string;
-    parentId?: string;
+export interface DocumentTreeNode extends IDocument {
     children?: DocumentTreeNode[];
+    parent?: DocumentTreeNode;
 
     // 其他可能的属性
     [key: string]: any;
@@ -537,11 +456,10 @@ export interface DocumentTreeNode {
 export interface CategoryResource {
     id: string;
     name: string;
+    alias: string;
+    desc: string;
     type: string;
-    parentId?: string;
 
-    // 其他可能的属性
-    [key: string]: any;
 }
 
 // OLTP元数据服务相关类型
@@ -552,7 +470,10 @@ export interface CalcField {
     desc?: string;
     expression: string;
     dataType: string;
-    format?: string;
+    dataFormat?: string;
+    condition?: string;
+    isInGroup?: string;
+    isBuildSql?: boolean;
 
     // 其他可能的属性
     [key: string]: any;
@@ -561,15 +482,9 @@ export interface CalcField {
 export interface TableField {
     id: string;
     name: string;
-    alias?: string;
-    desc?: string;
-    dataType: string;
-    length?: number;
-    precision?: number;
-    scale?: number;
-    nullable?: boolean;
-    primaryKey?: boolean;
-    defaultValue?: string;
+    dateType: string;
+    columnSize: number;
+    decimalDigits: number;
 
     // 其他可能的属性
     [key: string]: any;
@@ -577,32 +492,15 @@ export interface TableField {
 
 // 图形报表服务相关类型
 export interface GraphicReport {
-    id: string;
-    name: string;
-    alias: string;
-    description?: string;
-    type: string;
-    params?: any[];
-    parameterPanelId?: string;
-    clientId?: string;
-    width?: string;
-    height?: string;
-    flashBasePath?: string;
-    timeConsuming?: any;
+    clientId: string;
+    width: string;
+    height: string;
+    flashBasePath: string;
+    parameterPanelId: string;
+    params: Parameter[];
+    serviceName: string;
+    timeConsuming: any;
 
-    // 其他可能的属性
-    [key: string]: any;
-}
-
-// 时间消耗相关类型
-export interface TimeConsumingInfo {
-    id: string;
-    name: string;
-    startTime: Date;
-    endTime: Date;
-    duration: number; // 持续时间（毫秒）
-    status: string; // 状态
-    progress: number; // 进度
     // 其他可能的属性
     [key: string]: any;
 }
@@ -612,11 +510,22 @@ export interface User {
     id: string;
     name: string;
     alias?: string;
-    description?: string;
     password?: string;
-    isEnabled: boolean;
-    forceChangePassword?: boolean;
-
+    desc?: string;
+    enabled: string; // 对应Java类中的enabledCol字段
+    cellPhoneNumber?: string;
+    emailAddress?: string;
+    validityType?: string;
+    validityStartTime?: Date;
+    validityEndTime?: Date;
+    pwdLastModifyTime?: Date;
+    lastLoginTime?: Date;
+    assignedGroups?: any[]; // 对应Java类中的List<GroupToUser>
+    assignedRoles?: any[]; // 对应Java类中的List<Role>
+    createTime?: Date;
+    updateTime?: Date;
+    cellPhoneDecoded?: boolean;
+    emailDecoded?: boolean;
     // 其他可能的属性
     [key: string]: any;
 }
@@ -625,29 +534,52 @@ export interface Role {
     id: string;
     name: string;
     alias?: string;
-    description?: string;
-
+    desc?: string;
+    systemId?: string;
+    groupId?: string;
+    componentDefine?: string;
+    creatorGroup?: any; // 对应Java类中的Group类型
+    groupToRole?: any[]; // 对应Java类中的List<GroupToRole>
+    functions?: any[]; // 对应Java类中的List<Function>
+    assignedUsers?: any[]; // 对应Java类中的List<User>
+    enabled?: string;
+    
     // 其他可能的属性
     [key: string]: any;
 }
 
 export interface Department {
-    id: string;
-    name: string;
-    alias?: string;
-    description?: string;
-    departmentCode?: string;
+    id: string;                // 组ID
+    name: string;              // 组名称
+    alias?: string;            // 组别名
+    desc?: string;             // 描述
+    orgId?: string;            // 组织ID
+    departmentCode?: string;   // 部门代码
+    systemId?: string;         // 系统ID
+    createTime?: Date;         // 创建时间
+    updateTime?: Date;         // 更新时间
+    enabled?: string;          // 启用状态
+    parentGroup?: Department;  // 父组
+    subGroups?: Department[];  // 子组列表
+    assignedUsers?: User[];    // 已分配用户列表
+    groupToRole?: any[];       // 组角色关联
+    createdRoles?: Role[];     // 创建的角色列表
 
     // 其他可能的属性
     [key: string]: any;
 }
 
 export interface FunctionPermission {
-    id: string;
-    name: string;
-    alias?: string;
-    description?: string;
-    parentId?: string;
+    id: string;              // 功能ID
+    name: string;            // 功能名称
+    alias?: string;          // 功能别名
+    desc?: string;           // 功能描述
+    systemId?: string;       // 系统ID
+    isBuiltIn?: string;      // 是否内置功能
+    order?: number;          // 排序
+    parentFunction?: FunctionPermission;  // 父功能
+    subFunctions?: FunctionPermission[];  // 子功能列表
+    rolesToFunction?: Role[];             // 关联角色列表
 
     // 其他可能的属性
     [key: string]: any;
@@ -687,6 +619,18 @@ export type SSReportExportType = keyof Pick<AllExportTypeMap, 'PDF' | 'PNG' | 'W
 export type JSONArray = any[];
 
 // CombinedReportService 相关类型
+// 客户端简单报表相关类型
+export interface ReportBean {
+    params?: any[];
+    fields?: any[];
+    clientConfig?: string;
+}
+
+export interface ClientReportView {
+    clientId?: string;
+    reportBean?: ReportBean;
+}
+
 export interface ICombinedReport {
     currentReportName: string;
     rowsPerPage: number;

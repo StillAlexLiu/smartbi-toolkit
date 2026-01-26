@@ -1,18 +1,6 @@
-// 定义SmartBI系统配置服务相关的类型接口
+// 导入公共类型
+import type { SystemConfig } from '../types';
 
-export interface SystemConfig {
-    id: string;
-    key: string;
-    name: string;
-    value: string;
-    description?: string;
-    category?: string;
-    dataType?: string; // 数据类型，如STRING, NUMBER, BOOLEAN等
-    defaultValue?: string;
-    editable?: boolean; // 是否可编辑
-    // 其他可能的属性
-    [key: string]: any;
-}
 
 import { smartbi } from "../index";
 
