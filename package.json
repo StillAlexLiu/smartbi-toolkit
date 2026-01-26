@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/StillAlexLiu/smartbi-toolkit.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
