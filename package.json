@@ -1,16 +1,22 @@
 {
   "name": "smartbi-toolkit",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keys": [
     "smartbi",
     "扩展包",
     "ext",
-    "typescript"
+    "typescript",
+    "smartbi-toolkit",
   ],
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "description": "SmartBI 非官方JS sdk和ext构建工具",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StillAlexLiu/smartbi-toolkit.git"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
