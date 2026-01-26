@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
+          bun-version: latest
       - run: bun install
 
   publish-gpr:
