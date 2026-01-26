@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-hostname: SMARTBI-LQEOJTK
-address: 10.10.202.30
-commitId: ddc5d534914d2a161fc24129db1999ebab4db08e
-
