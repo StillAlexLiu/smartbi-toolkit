@@ -8,15 +8,22 @@ export type SmartbiDev = {
 const __smartbi_env: SmartbiDev & {
     smartbiPath: string,
     mode: 'dev' | 'prod',
+    noop?: number,
 } = {
     username: '',
     password: '',
-    smartbiPath: '/smartbi', mode: 'prod'
+    smartbiPath: '/smartbi',
+    mode: 'prod',
+    noop: 30000
+}
+const HEADERS: Readonly<Record<string, string>> = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'X-Requested-With': 'XMLHttpRequest',
 }
 export const setSmartbiEnv = ({
                                   path = '/smartbi',
                                   dev,
-                                  noop = 3000,
+                                  noop = 30000,
                                   mode = 'prod'
                               }: {
     path?: '/smartbi' | '' | string,
@@ -24,20 +31,57 @@ export const setSmartbiEnv = ({
     mode?: 'dev' | 'prod',
     noop?: number,
 }) => {
-    console.log(path, dev, noop)
     __smartbi_env.username = dev?.username || ''
-    __smartbi_env.username = dev?.username || ''
+    __smartbi_env.password = dev?.password || ''
+    __smartbi_env.smartbiPath = path
     __smartbi_env.mode = mode
+    __smartbi_env.noop = noop
     if (dev) {
         console.log("请勿将账号信息直接赋值到username和password中，避免暴露账号密码，如需要，可考虑从环境变量.env文件中获取")
     }
 }
+/**
+ * pending：登录中
+ * online：已登录
+ * offline：未登录
+ */
 type Status = 'pending' | 'online' | 'offline'
 type PostStack = () => void
-const postStack = () => {
+const smartbiInit = () => {
     const postList = new Set<PostStack>()
+    let timer: any = 0
     let status: Status = 'offline'
+
     return {
+        /**
+         * 停止心跳
+         */
+        stopHeatBeat() {
+            try {
+                clearInterval(timer)
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        /**
+         * 开始心跳循环，默认30秒，通过环境变量noop修改，登录后可用
+         *
+         */
+        startHeatBeat() {
+            this.stopHeatBeat()
+            timer = setInterval(() => {
+                if (status === 'online') {
+                    noop().then(() => {
+
+                    })
+                }
+
+            }, __smartbi_env.noop)
+        },
+        /**
+         * 修改状态
+         * @param value {Status}
+         */
         setStatus(value: Status) {
             status = value
         },
@@ -73,7 +117,8 @@ const postStack = () => {
         }
     }
 }
-export const {emit, on, handler, setStatus} = postStack()
+const {emit, on, handler, setStatus, startHeatBeat, stopHeatBeat} = smartbiInit()
+export {setStatus, startHeatBeat, stopHeatBeat}
 export const smartbi = <T>(
     className: string,
     methodName: string,
@@ -88,10 +133,7 @@ export const smartbi = <T>(
                     methodName,
                     params: JSON.stringify(params),
                 }, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
+                    headers: HEADERS
                 })
             })
             .then(res => {
@@ -123,4 +165,11 @@ export const login = (form?: {
         })
     })
 }
-
+/**
+ * 心跳
+ */
+export const noop = () => {
+    return axios.get(__smartbi_env.smartbiPath + '/vision/noop.jsp', {
+        headers: HEADERS
+    })
+}
