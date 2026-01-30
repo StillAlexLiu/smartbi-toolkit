@@ -1,159 +1,68 @@
 {
   "name": "smartbi-toolkit",
-  "private": false,
-  "version": "1.1.3",
-  "keys": [
-    "smartbi",
-    "扩展包",
-    "ext",
-    "typescript",
-    "smartbi-toolkit"
-  ],
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "description": "SmartBI 非官方JS sdk和ext构建工具",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/StillAlexLiu/smartbi-toolkit.git"
-  },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
-    "./VitePluginSmartbi": {
-      "import": "./dist/vite-plugin-smartbi/index.js",
-      "types": "./dist/vite-plugin-smartbi/index.d.ts"
+    "./vite-plugin-smartbi": {
+      "types": "./dist/vite-plugin-smartbi/index.d.ts",
+      "import": "./dist/vite-plugin-smartbi.js",
+      "require": "./dist/vite-plugin-smartbi.cjs"
     },
-    "./AnalysisReportService": {
-      "import": "./dist/methods/AnalysisReportService.js",
-      "types": "./dist/methods/AnalysisReportService.d.ts"
+    "./vite-plugin-smartbix": {
+      "types": "./dist/vite-plugin-smartbix/index.d.ts",
+      "import": "./dist/vite-plugin-smartbix.js",
+      "require": "./dist/vite-plugin-smartbix.cjs"
     },
-    "./BusinessThemeService": {
-      "import": "./dist/methods/BusinessThemeService.js",
-      "types": "./dist/methods/BusinessThemeService.d.ts"
+    "./methods/*": {
+      "types": "./dist/methods/*.d.ts",
+      "import": "./dist/methods/*.js",
+      "require": "./dist/methods/*.cjs"
     },
-    "./BusinessViewService": {
-      "import": "./dist/methods/BusinessViewService.js",
-      "types": "./dist/methods/BusinessViewService.d.ts"
-    },
-    "./CatalogService": {
-      "import": "./dist/methods/CatalogService.js",
-      "types": "./dist/methods/CatalogService.d.ts"
-    },
-    "./ClientCombinedReportService": {
-      "import": "./dist/methods/ClientCombinedReportService.js",
-      "types": "./dist/methods/ClientCombinedReportService.d.ts"
-    },
-    "./ClientInsightService": {
-      "import": "./dist/methods/ClientInsightService.js",
-      "types": "./dist/methods/ClientInsightService.d.ts"
-    },
-    "./ClientReportService": {
-      "import": "./dist/methods/ClientReportService.js",
-      "types": "./dist/methods/ClientReportService.d.ts"
-    },
-    "./CombinedReportService": {
-      "import": "./dist/methods/CombinedReportService.js",
-      "types": "./dist/methods/CombinedReportService.d.ts"
-    },
-    "./DataSourceService": {
-      "import": "./dist/methods/DataSourceService.js",
-      "types": "./dist/methods/DataSourceService.d.ts"
-    },
-    "./GraphicReportService": {
-      "import": "./dist/methods/GraphicReportService.js",
-      "types": "./dist/methods/GraphicReportService.d.ts"
-    },
-    "./InsightReport": {
-      "import": "./dist/methods/InsightReport.js",
-      "types": "./dist/methods/InsightReport.d.ts"
-    },
-    "./MetadataService": {
-      "import": "./dist/methods/MetadataService.js",
-      "types": "./dist/methods/MetadataService.d.ts"
-    },
-    "./OfficeReport": {
-      "import": "./dist/methods/OfficeReport.js",
-      "types": "./dist/methods/OfficeReport.d.ts"
-    },
-    "./OfficeReportService": {
-      "import": "./dist/methods/OfficeReportService.js",
-      "types": "./dist/methods/OfficeReportService.d.ts"
-    },
-    "./OltpMetadataService": {
-      "import": "./dist/methods/OltpMetadataService.js",
-      "types": "./dist/methods/OltpMetadataService.d.ts"
-    },
-    "./ParameterService": {
-      "import": "./dist/methods/ParameterService.js",
-      "types": "./dist/methods/ParameterService.d.ts"
-    },
-    "./PoolService": {
-      "import": "./dist/methods/PoolService.js",
-      "types": "./dist/methods/PoolService.d.ts"
-    },
-    "./PortalService": {
-      "import": "./dist/methods/PortalService.js",
-      "types": "./dist/methods/PortalService.d.ts"
-    },
-    "./Report": {
-      "import": "./dist/methods/Report.js",
-      "types": "./dist/methods/Report.d.ts"
-    },
-    "./SSReport": {
-      "import": "./dist/methods/SSReport.js",
-      "types": "./dist/methods/SSReport.d.ts"
-    },
-    "./ScheduleTaskService": {
-      "import": "./dist/methods/ScheduleTaskService.js",
-      "types": "./dist/methods/ScheduleTaskService.d.ts"
-    },
-    "./SimpleReportService": {
-      "import": "./dist/methods/SimpleReportService.js",
-      "types": "./dist/methods/SimpleReportService.d.ts"
-    },
-    "./SpreadSheetReportService": {
-      "import": "./dist/methods/SpreadSheetReportService.js",
-      "types": "./dist/methods/SpreadSheetReportService.d.ts"
-    },
-    "./SystemConfigService": {
-      "import": "./dist/methods/SystemConfigService.js",
-      "types": "./dist/methods/SystemConfigService.d.ts"
-    },
-    "./TimeConsuming": {
-      "import": "./dist/methods/TimeConsuming.js",
-      "types": "./dist/methods/TimeConsuming.d.ts"
-    },
-    "./TimeConsumingService": {
-      "import": "./dist/methods/TimeConsumingService.js",
-      "types": "./dist/methods/TimeConsumingService.d.ts"
-    },
-    "./UserManagerService": {
-      "import": "./dist/methods/UserManagerService.js",
-      "types": "./dist/methods/UserManagerService.d.ts"
+    "./*": {
+      "types": "./dist/methods/*.d.ts",
+      "import": "./dist/methods/*.js",
+      "require": "./dist/methods/*.cjs"
     }
   },
-  "scripts": {
-    "build": "tsc"
-  },
   "files": [
-    "dist"
+    "dist/**/*"
   ],
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^25.0.10",
-    "typescript": "~5.9.3",
-    "vite": "8.0.0-beta.9"
-  },
-  "peerDependencies": {
-    "axios": "^1.3.6",
-    "chalk": "^5.2.0"
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lib-build": "vite build",
+    "test:esm": "node test-imports.mjs",
+    "test:cjs": "node test-cjs.cjs",
+    "test:all": "npm run test:esm && npm run test:cjs",
+    "test:build": "npm run build && npm run test:all"
   },
   "dependencies": {
-    "axios": "^1.13.2",
+    "axios": "^1.6.0",
     "chalk": "^5.6.2",
-    "fs-extra": "^11.3.3"
-  }
+    "fs-extra": "^11.3.3",
+    "path-browserify": "^1.0.1",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.1.0",
+    "typescript": "~5.9.3",
+    "vite": "7.3.1",
+    "vite-plugin-node-polyfills": "^0.25.0"
+  },
+  "keywords": [
+    "typescript",
+    "vite",
+    "library"
+  ],
+  "author": "",
+  "license": "MIT"
 }
