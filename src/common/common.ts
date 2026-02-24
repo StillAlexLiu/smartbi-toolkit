@@ -1,9 +1,6 @@
-// import {ensureFile} from 'fs-extra'
-// import {writeFile} from 'fs'
-// import nodePath from 'path'
-const {ensureFile} = require("fs-extra");
-const {writeFile} = require("fs");
-const nodePath = require("path");
+import {ensureFile} from "fs-extra";
+import {writeFile} from "fs/promises";
+import { resolve} from "node:path";
 
 export type WebProjectConfig = {
     /**
@@ -28,7 +25,7 @@ export type WebProjectConfig = {
     version?: string
 };
 
-export const buildWebProject = ({name, alias, desc, priority, version,}: WebProjectConfig) => {
+export const buildWebProject = ({name, alias, desc, priority, version,}: WebProjectConfig, rootPath: string) => {
     const web = `<web-app/>`
     const portlet = `<?xml version="1.0" encoding="UTF-8"?>
         <portlet-app>
@@ -57,16 +54,18 @@ export const buildWebProject = ({name, alias, desc, priority, version,}: WebProj
             </bean>
         </beans>
     `
+    const versionPath = resolve(rootPath, "META-INF/version.txt")
+    const outputpath = resolve(rootPath, `../${name}.ext`)
     const build = `<?xml version="1.0" encoding="UTF-8"?>
         <project name="${name}" default="dist">
             <target name="dist" >
                 <tstamp>
                     <format property="today" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </tstamp>
-                <echo file="\${basedir}/source/META-INF/version.txt" message="\${today}"/>
+                <echo file="${versionPath}" message="\${today}"/>
         
-                <jar destfile="\${basedir}/${name}.ext" duplicate="preserve">
-                    <fileset dir="\${basedir}/source"/>
+                <jar destfile="${outputpath}" duplicate="preserve">
+                    <fileset dir="${rootPath}"/>
                 </jar>
             </target>
         </project>
@@ -78,27 +77,32 @@ export const buildWebProject = ({name, alias, desc, priority, version,}: WebProj
 }
 
 
-export const makeWebDir = (rootPath: string, config: WebProjectConfig) => {
-    return new Promise(resolve => {
+export const makeWebDir = (rootPath: string, config: WebProjectConfig): Promise<void> => {
+    return new Promise(r => {
         const {
             web, applicationContext, extension, portlet,
-        } = buildWebProject(config)
+            build
+        } = buildWebProject(config, rootPath)
         const paths: Record<string, string> = {
             "WEB-INF/web.xml": web,
             "META-INF/applicationContext.xml": applicationContext,
             "META-INF/extension.xml": extension,
             "META-INF/portlet.xml": portlet
         }
-        Promise.all(Object.keys(paths).map((_path: string) => {
-            const filePath = nodePath.resolve(rootPath, _path);
-            return ensureFile(filePath).then(() => {
-                return writeFile(filePath, paths[_path], () => {
-
-                });
+        const plist: Promise<void>[] = Object.keys(paths).map((_path: string): Promise<void> => {
+            return new Promise((r) => {
+                const filePath = resolve(rootPath, _path);
+                ensureFile(filePath).then(() => {
+                    return writeFile(filePath, paths[_path])
+                }).then(() => {
+                    r()
+                })
             })
-        })).then((r) => {
-            console.log(r)
-            resolve(r)
+        })
+        Promise.all(plist).then(() => {
+            writeFile(resolve(rootPath, "../build.xml"), build).then(() => {
+                r()
+            })
         })
     })
 

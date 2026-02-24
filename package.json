@@ -1,68 +1,77 @@
 {
   "name": "smartbi-toolkit",
-  "version": "1.0.0",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./vite-plugin-smartbi": {
-      "types": "./dist/vite-plugin-smartbi/index.d.ts",
-      "import": "./dist/vite-plugin-smartbi.js",
-      "require": "./dist/vite-plugin-smartbi.cjs"
-    },
-    "./vite-plugin-smartbix": {
-      "types": "./dist/vite-plugin-smartbix/index.d.ts",
-      "import": "./dist/vite-plugin-smartbix.js",
-      "require": "./dist/vite-plugin-smartbix.cjs"
-    },
-    "./methods/*": {
-      "types": "./dist/methods/*.d.ts",
-      "import": "./dist/methods/*.js",
-      "require": "./dist/methods/*.cjs"
-    },
-    "./*": {
-      "types": "./dist/methods/*.d.ts",
-      "import": "./dist/methods/*.js",
-      "require": "./dist/methods/*.cjs"
-    }
+  "version": "1.1.0",
+  "description": "A starter for creating a TypeScript package.",
+  "author": "Alex Liu <648632561@qq.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/author/library#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/author/library.git"
   },
+  "bugs": {
+    "url": "https://github.com/author/library/issues"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./service/AnalysisReportService": "./dist/service/AnalysisReportService.mjs",
+    "./service/BusinessThemeService": "./dist/service/BusinessThemeService.mjs",
+    "./service/BusinessViewService": "./dist/service/BusinessViewService.mjs",
+    "./service/CatalogService": "./dist/service/CatalogService.mjs",
+    "./service/ClientCombinedReportService": "./dist/service/ClientCombinedReportService.mjs",
+    "./service/ClientInsightService": "./dist/service/ClientInsightService.mjs",
+    "./service/ClientReportService": "./dist/service/ClientReportService.mjs",
+    "./service/CombinedReportService": "./dist/service/CombinedReportService.mjs",
+    "./service/DataSourceService": "./dist/service/DataSourceService.mjs",
+    "./service/GraphicReportService": "./dist/service/GraphicReportService.mjs",
+    "./service/InsightReport": "./dist/service/InsightReport.mjs",
+    "./service/MetadataService": "./dist/service/MetadataService.mjs",
+    "./service/OfficeReport": "./dist/service/OfficeReport.mjs",
+    "./service/OfficeReportService": "./dist/service/OfficeReportService.mjs",
+    "./service/OltpMetadataService": "./dist/service/OltpMetadataService.mjs",
+    "./service/ParameterService": "./dist/service/ParameterService.mjs",
+    "./service/PoolService": "./dist/service/PoolService.mjs",
+    "./service/PortalService": "./dist/service/PortalService.mjs",
+    "./service/Report": "./dist/service/Report.mjs",
+    "./service/ScheduleTaskService": "./dist/service/ScheduleTaskService.mjs",
+    "./service/SimpleReportService": "./dist/service/SimpleReportService.mjs",
+    "./service/SpreadSheetReportService": "./dist/service/SpreadSheetReportService.mjs",
+    "./service/SSReport": "./dist/service/SSReport.mjs",
+    "./service/SystemConfigService": "./dist/service/SystemConfigService.mjs",
+    "./service/TimeConsuming": "./dist/service/TimeConsuming.mjs",
+    "./service/TimeConsumingService": "./dist/service/TimeConsumingService.mjs",
+    "./service/UserManagerService": "./dist/service/UserManagerService.mjs",
+    "./vite-plugin/vite-plugin-smartbi": "./dist/vite-plugin/vite-plugin-smartbi.mjs",
+    "./vite-plugin/vite-plugin-smartbix": "./dist/vite-plugin/vite-plugin-smartbix.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lib-build": "vite build",
-    "test:esm": "node test-imports.mjs",
-    "test:cjs": "node test-cjs.cjs",
-    "test:all": "npm run test:esm && npm run test:cjs",
-    "test:build": "npm run build && npm run test:all"
-  },
-  "dependencies": {
-    "axios": "^1.6.0",
-    "chalk": "^5.6.2",
-    "fs-extra": "^11.3.3",
-    "path-browserify": "^1.0.1",
-    "vite-plugin-dts": "^4.5.4"
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^25.1.0",
-    "typescript": "~5.9.3",
-    "vite": "7.3.1",
-    "vite-plugin-node-polyfills": "^0.25.0"
+    "@types/node": "^25.2.0",
+    "bumpp": "^10.4.0",
+    "tsdown": "^0.20.1",
+    "typescript": "^5.9.3"
   },
-  "keywords": [
-    "typescript",
-    "vite",
-    "library"
-  ],
-  "author": "",
-  "license": "MIT"
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "axios": "^1.13.4",
+    "chalk": "^5.6.2",
+    "fs-extra": "^11.3.3",
+    "rollup": "^4.57.1",
+    "rollup-plugin-vue": "^5.1.9",
+    "vite": "^7.3.1"
+  }
 }
