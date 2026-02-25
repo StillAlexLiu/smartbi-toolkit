@@ -1,6 +1,6 @@
 import {ensureFile} from "fs-extra";
 import {writeFile} from "fs/promises";
-import { resolve} from "node:path";
+import {resolve} from "node:path";
 
 export type WebProjectConfig = {
     /**
@@ -71,7 +71,10 @@ export const buildWebProject = ({name, alias, desc, priority, version,}: WebProj
         </project>
 `
     return {
-        web, applicationContext, extension, portlet,
+        web,
+        applicationContext,
+        extension,
+        portlet,
         build
     }
 }
