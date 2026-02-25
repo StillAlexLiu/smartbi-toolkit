@@ -1,17 +1,17 @@
 {
   "name": "smartbi-toolkit",
   "type": "module",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A starter for creating a TypeScript package.",
   "author": "Alex Liu <648632561@qq.com>",
   "license": "MIT",
-  "homepage": "https://github.com/author/library#readme",
+  "homepage": "https://github.com/StillAlexLiu/smartbi-toolkit/#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/StillAlexLiu/smartbi-toolkit.git"
   },
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/StillAlexLiu/smartbi-toolkit"
   },
   "exports": {
     ".": "./dist/index.js",
