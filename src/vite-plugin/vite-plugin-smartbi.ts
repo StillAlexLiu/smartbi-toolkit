@@ -19,10 +19,6 @@ export type VitePluginSmartbiOptions = {
      * vision到html中间的路径
      */
     appendPath?: string,
-    /**
-     * 插件版本
-     */
-    version?: string
 } & WebProjectConfig
 
 
