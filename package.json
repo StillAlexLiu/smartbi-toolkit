@@ -1,7 +1,7 @@
 {
   "name": "smartbi-toolkit",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A starter for creating a TypeScript package.",
   "author": "Alex Liu <648632561@qq.com>",
   "license": "MIT",
