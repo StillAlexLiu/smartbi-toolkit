@@ -1,159 +1,77 @@
 {
   "name": "smartbi-toolkit",
-  "private": false,
-  "version": "1.1.4",
-  "keys": [
-    "smartbi",
-    "扩展包",
-    "ext",
-    "typescript",
-    "smartbi-toolkit"
-  ],
   "type": "module",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "description": "SmartBI 非官方JS sdk和ext构建工具",
+  "version": "1.1.0",
+  "description": "A starter for creating a TypeScript package.",
+  "author": "Alex Liu <648632561@qq.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/author/library#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/StillAlexLiu/smartbi-toolkit.git"
+    "url": "git+https://github.com/author/library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/author/library/issues"
   },
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./VitePluginSmartbi": {
-      "import": "./dist/vite-plugin-smartbi/index.js",
-      "types": "./dist/vite-plugin-smartbi/index.d.ts"
-    },
-    "./AnalysisReportService": {
-      "import": "./dist/methods/AnalysisReportService.js",
-      "types": "./dist/methods/AnalysisReportService.d.ts"
-    },
-    "./BusinessThemeService": {
-      "import": "./dist/methods/BusinessThemeService.js",
-      "types": "./dist/methods/BusinessThemeService.d.ts"
-    },
-    "./BusinessViewService": {
-      "import": "./dist/methods/BusinessViewService.js",
-      "types": "./dist/methods/BusinessViewService.d.ts"
-    },
-    "./CatalogService": {
-      "import": "./dist/methods/CatalogService.js",
-      "types": "./dist/methods/CatalogService.d.ts"
-    },
-    "./ClientCombinedReportService": {
-      "import": "./dist/methods/ClientCombinedReportService.js",
-      "types": "./dist/methods/ClientCombinedReportService.d.ts"
-    },
-    "./ClientInsightService": {
-      "import": "./dist/methods/ClientInsightService.js",
-      "types": "./dist/methods/ClientInsightService.d.ts"
-    },
-    "./ClientReportService": {
-      "import": "./dist/methods/ClientReportService.js",
-      "types": "./dist/methods/ClientReportService.d.ts"
-    },
-    "./CombinedReportService": {
-      "import": "./dist/methods/CombinedReportService.js",
-      "types": "./dist/methods/CombinedReportService.d.ts"
-    },
-    "./DataSourceService": {
-      "import": "./dist/methods/DataSourceService.js",
-      "types": "./dist/methods/DataSourceService.d.ts"
-    },
-    "./GraphicReportService": {
-      "import": "./dist/methods/GraphicReportService.js",
-      "types": "./dist/methods/GraphicReportService.d.ts"
-    },
-    "./InsightReport": {
-      "import": "./dist/methods/InsightReport.js",
-      "types": "./dist/methods/InsightReport.d.ts"
-    },
-    "./MetadataService": {
-      "import": "./dist/methods/MetadataService.js",
-      "types": "./dist/methods/MetadataService.d.ts"
-    },
-    "./OfficeReport": {
-      "import": "./dist/methods/OfficeReport.js",
-      "types": "./dist/methods/OfficeReport.d.ts"
-    },
-    "./OfficeReportService": {
-      "import": "./dist/methods/OfficeReportService.js",
-      "types": "./dist/methods/OfficeReportService.d.ts"
-    },
-    "./OltpMetadataService": {
-      "import": "./dist/methods/OltpMetadataService.js",
-      "types": "./dist/methods/OltpMetadataService.d.ts"
-    },
-    "./ParameterService": {
-      "import": "./dist/methods/ParameterService.js",
-      "types": "./dist/methods/ParameterService.d.ts"
-    },
-    "./PoolService": {
-      "import": "./dist/methods/PoolService.js",
-      "types": "./dist/methods/PoolService.d.ts"
-    },
-    "./PortalService": {
-      "import": "./dist/methods/PortalService.js",
-      "types": "./dist/methods/PortalService.d.ts"
-    },
-    "./Report": {
-      "import": "./dist/methods/Report.js",
-      "types": "./dist/methods/Report.d.ts"
-    },
-    "./SSReport": {
-      "import": "./dist/methods/SSReport.js",
-      "types": "./dist/methods/SSReport.d.ts"
-    },
-    "./ScheduleTaskService": {
-      "import": "./dist/methods/ScheduleTaskService.js",
-      "types": "./dist/methods/ScheduleTaskService.d.ts"
-    },
-    "./SimpleReportService": {
-      "import": "./dist/methods/SimpleReportService.js",
-      "types": "./dist/methods/SimpleReportService.d.ts"
-    },
-    "./SpreadSheetReportService": {
-      "import": "./dist/methods/SpreadSheetReportService.js",
-      "types": "./dist/methods/SpreadSheetReportService.d.ts"
-    },
-    "./SystemConfigService": {
-      "import": "./dist/methods/SystemConfigService.js",
-      "types": "./dist/methods/SystemConfigService.d.ts"
-    },
-    "./TimeConsuming": {
-      "import": "./dist/methods/TimeConsuming.js",
-      "types": "./dist/methods/TimeConsuming.d.ts"
-    },
-    "./TimeConsumingService": {
-      "import": "./dist/methods/TimeConsumingService.js",
-      "types": "./dist/methods/TimeConsumingService.d.ts"
-    },
-    "./UserManagerService": {
-      "import": "./dist/methods/UserManagerService.js",
-      "types": "./dist/methods/UserManagerService.d.ts"
-    }
+    ".": "./dist/index.js",
+    "./service/AnalysisReportService": "./dist/service/AnalysisReportService.js",
+    "./service/BusinessThemeService": "./dist/service/BusinessThemeService.js",
+    "./service/BusinessViewService": "./dist/service/BusinessViewService.js",
+    "./service/CatalogService": "./dist/service/CatalogService.js",
+    "./service/ClientCombinedReportService": "./dist/service/ClientCombinedReportService.js",
+    "./service/ClientInsightService": "./dist/service/ClientInsightService.js",
+    "./service/ClientReportService": "./dist/service/ClientReportService.js",
+    "./service/CombinedReportService": "./dist/service/CombinedReportService.js",
+    "./service/DataSourceService": "./dist/service/DataSourceService.js",
+    "./service/GraphicReportService": "./dist/service/GraphicReportService.js",
+    "./service/InsightReport": "./dist/service/InsightReport.js",
+    "./service/MetadataService": "./dist/service/MetadataService.js",
+    "./service/OfficeReport": "./dist/service/OfficeReport.js",
+    "./service/OfficeReportService": "./dist/service/OfficeReportService.js",
+    "./service/OltpMetadataService": "./dist/service/OltpMetadataService.js",
+    "./service/ParameterService": "./dist/service/ParameterService.js",
+    "./service/PoolService": "./dist/service/PoolService.js",
+    "./service/PortalService": "./dist/service/PortalService.js",
+    "./service/Report": "./dist/service/Report.js",
+    "./service/ScheduleTaskService": "./dist/service/ScheduleTaskService.js",
+    "./service/SimpleReportService": "./dist/service/SimpleReportService.js",
+    "./service/SpreadSheetReportService": "./dist/service/SpreadSheetReportService.js",
+    "./service/SSReport": "./dist/service/SSReport.js",
+    "./service/SystemConfigService": "./dist/service/SystemConfigService.js",
+    "./service/TimeConsuming": "./dist/service/TimeConsuming.js",
+    "./service/TimeConsumingService": "./dist/service/TimeConsumingService.js",
+    "./service/UserManagerService": "./dist/service/UserManagerService.js",
+    "./vite-plugin/vite-plugin-smartbi": "./dist/vite-plugin/vite-plugin-smartbi.js",
+    "./vite-plugin/vite-plugin-smartbix": "./dist/vite-plugin/vite-plugin-smartbix.js",
+    "./package.json": "./package.json"
   },
-  "scripts": {
-    "build": "tsc"
-  },
+  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^25.0.10",
-    "typescript": "~5.9.3",
-    "vite": "8.0.0-beta.9"
-  },
-  "peerDependencies": {
-    "axios": "^1.3.6",
-    "chalk": "^5.2.0"
+    "@types/node": "^25.2.0",
+    "bumpp": "^10.4.0",
+    "tsdown": "^0.20.1",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.13.2",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "axios": "^1.13.4",
     "chalk": "^5.6.2",
-    "fs-extra": "^11.3.3"
+    "fs-extra": "^11.3.3",
+    "rollup": "^4.57.1",
+    "rollup-plugin-vue": "^5.1.9",
+    "vite": "^7.3.1"
   }
 }

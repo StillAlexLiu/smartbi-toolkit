@@ -1,40 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "types": [
-      "vite/client"
-    ],
-    "skipLibCheck": true,
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-//    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
+    "target": "esnext",
+    "lib": ["es2023"],
     "moduleDetection": "force",
-//    "noEmit": true,
-    /* Linting */
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    // 其他
-
-    "sourceMap": false,
-    "declarationMap": false,
     "declaration": true,
-
-
-    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "declarationMap": false
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
