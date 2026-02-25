@@ -2,7 +2,7 @@
   "name": "smartbi-toolkit",
   "type": "module",
   "version": "1.2.2",
-  "description": "A starter for creating a TypeScript package.",
+  "description": "非官方smartbi开发工具包，集成了rmi调用，ext扩展包一键打包等功能",
   "author": "Alex Liu <648632561@qq.com>",
   "license": "MIT",
   "homepage": "https://github.com/StillAlexLiu/smartbi-toolkit/#readme",
