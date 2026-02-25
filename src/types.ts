@@ -65,22 +65,9 @@ export interface ViewMetaData {
 
 export type PropertyName = 'alias' | 'desc' | 'dataType' | 'dataFormat' | 'orderby' | 'transformRule';
 
-export const PropertyName = {
-    ALIAS: 'alias',
-    DESC: 'desc',
-    DATA_TYPE: 'dataType',
-    DATA_FORMAT: 'dataFormat',
-    ORDER_BY: 'orderby',
-    TRANSFORM_RULE: 'transformRule'
-};
 
 export type BusinessViewType = 'RAW_SQL_QUERY' | 'VISUAL_QUERY' | 'SQL_QUERY';
 
-export const BusinessViewType = {
-    RAW_SQL_QUERY: 'RAW_SQL_QUERY',
-    VISUAL_QUERY: 'VISUAL_QUERY',
-    SQL_QUERY: 'SQL_QUERY'
-};
 
 // 目录服务相关类型
 export interface CatalogElement {
@@ -129,11 +116,6 @@ export interface ICatalogSearchResult {
 // 访问类型定义
 export type AccessType = 'REF' | 'READ' | 'WRITE';
 
-export const AccessType = {
-    REF: 'REF',    // 引用权限
-    READ: 'READ',  // 查看权限
-    WRITE: 'WRITE' // 编辑权限
-};
 
 // 目录元素类型定义
 export type CatalogElementType =
@@ -186,57 +168,6 @@ export type CatalogElementType =
     // 旧版类型
     | 'OLD_DATASET';            // 旧数据集
 
-// CatalogElementType 常量对象
-export const CatalogElementType = {
-    // 文件夹类型
-    FOLDER: 'FOLDER',
-
-    // 报表类型
-    SIMPLE_REPORT: 'SIMPLE_REPORT',           // 简单报表
-    ANALYSIS_REPORT: 'ANALYSIS_REPORT',       // 分析报表
-    COMBINED_QUERY: 'COMBINED_QUERY',         // 即席查询
-    INSIGHT: 'INSIGHT',                       // 透视分析
-    OLAP_REPORT: 'OLAP_REPORT',               // 多维分析
-
-    // 仪表盘类型
-    DASHBOARD: 'DASHBOARD',                   // 传统仪表盘
-    SMARTBIX_PAGE: 'SMARTBIX_PAGE',           // 交互式仪表盘
-
-    // 数据集类型
-    DATASET: 'DATASET',                       // 通用数据集
-    VISUAL: 'VISUAL',                         // 可视化数据集
-    SQL: 'SQL',                               // SQL数据集
-    PROCEDURE: 'PROCEDURE',                   // 存储过程数据集
-    NATIVE_SQL: 'NATIVE_SQL',                 // 原生SQL数据集
-    JAVA: 'JAVA',                             // JAVA数据集
-    SMARTBIX_DATASET: 'SMARTBIX_DATASET',     // 自助数据集
-    AUGMENTED_DATASET: 'AUGMENTED_DATASET',   // 数据模型
-
-    // 业务对象类型
-    BUSINESS_VIEW: 'BUSINESS_VIEW',           // 业务视图
-    BUSINESS_SUBJECT: 'BUSINESS_SUBJECT',     // 业务主题
-    BUSINESS_QUERY: 'BUSINESS_QUERY',         // 业务查询
-
-    // 电子表格类型
-    SPREADSHEET_REPORT: 'SPREADSHEET_REPORT', // 电子表格报表
-    WEB_SPREADSHEET_REPORT: 'WEB_SPREADSHEET_REPORT', // WEB电子表格
-
-    // 数据处理类型
-    DATA_PROCESS: 'SMARTBI_DATAPROCESS',      // 自助ETL
-    ETL_AUTOMATION: 'ETL_AUTOMATION',         // ETL自动化
-    JOB_FLOW: 'JOB_FLOW',                     // 作业流
-    DATA_MINING: 'SMARTBI_MINING',            // 数据挖掘
-
-    // 其他类型
-    URL_LINK: 'URL',                          // WEB链接
-    EXCEL_IMPORT_TEMPLATE: 'excelimport',     // Excel导入模板
-    TXT_QUERY_OBJECT: 'TXTQUERYOBJECT',       // 查询对象
-    TXT_DATA_SOURCE: 'TXTDATASOURCE',         // 数据源
-    SCHEMA: 'SCHEMA',                         // 模式
-
-    // 旧版类型
-    OLD_DATASET: 'OLD_DATASET'                // 旧数据集
-};
 
 // Assignee 类型定义
 export interface IAssignee {
@@ -526,6 +457,7 @@ export interface User {
     updateTime?: Date;
     cellPhoneDecoded?: boolean;
     emailDecoded?: boolean;
+
     // 其他可能的属性
     [key: string]: any;
 }
@@ -543,7 +475,7 @@ export interface Role {
     functions?: any[]; // 对应Java类中的List<Function>
     assignedUsers?: any[]; // 对应Java类中的List<User>
     enabled?: string;
-    
+
     // 其他可能的属性
     [key: string]: any;
 }
