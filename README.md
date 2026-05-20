@@ -51,11 +51,11 @@ noop()
 该工具为vite插件，可以一键生成ext扩展包，但需要有java和Apache Ant环境
 
 ```javascript
-import vitePluginSmartbi from 'smartbi-toolkit/vite-plugin/VitePluginSmartbi'
+import { VitePluginSmartbi } from 'smartbi-toolkit/vite-plugin/vite-plugin-smartbi'
 
 export default defineConfig({
     plugins: [
-        vitePluginSmartbi({
+        VitePluginSmartbi({
             name:'ext-test',
         })
     ],
@@ -104,11 +104,11 @@ export type VitePluginSmartbiOptions = {
 环境同上，构建工具封装
 
 ```javascript
-import vitePluginSmartbi from 'smartbi-toolkit/vite-plugin/VitePluginSmartbix'
+import { vitePluginSmartbiX } from 'smartbi-toolkit/vite-plugin/vite-plugin-smartbix'
 
 export default defineConfig({
     plugins: [
-        VitePluginSmartbix({
+        vitePluginSmartbiX({
             name:'ext-test',
         })
     ],
