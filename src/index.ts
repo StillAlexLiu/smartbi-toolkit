@@ -85,6 +85,12 @@ const smartbiInit = () => {
         setStatus(value: Status) {
             status = value
         },
+        /**
+         * 获取当前状态
+         */
+        getStatus(): Status {
+            return status
+        },
         emit() {
             postList.forEach(call => {
                 call()
@@ -94,7 +100,11 @@ const smartbiInit = () => {
         on(call: PostStack) {
             postList.add(call)
         },
-        handler(requireLogin: boolean): Promise<void> {
+        /**
+         * 等待登录完成的Promise，确保处于已登录状态
+         * @param requireLogin 是否需要登录
+         */
+        ensureLogin(requireLogin: boolean): Promise<void> {
             return new Promise(resolve => {
                 if (requireLogin) {
                     if (status === 'offline') {
@@ -117,8 +127,8 @@ const smartbiInit = () => {
         }
     }
 }
-const {emit, on, handler, setStatus, startHeatBeat, stopHeatBeat} = smartbiInit()
-export {setStatus, startHeatBeat, stopHeatBeat}
+const {emit, on, ensureLogin, setStatus, getStatus, startHeatBeat, stopHeatBeat} = smartbiInit()
+export {emit, on, ensureLogin, setStatus, getStatus, startHeatBeat, stopHeatBeat}
 export const smartbi = <T>(
     className: string,
     methodName: string,
@@ -126,7 +136,7 @@ export const smartbi = <T>(
     requireLogin: boolean = __smartbi_env.mode === 'dev', // 开发环境需要登录，生产环境需要自行实现登录，或者在扩展包下进行
 ): Promise<T> => {
     return new Promise((resolve, reject) => {
-        handler(requireLogin)
+        ensureLogin(requireLogin)
             .then(() => {
                 return axios.post(`${__smartbi_env.smartbiPath}/vision/RMIServlet`, {
                     className,
@@ -148,6 +158,55 @@ export const smartbi = <T>(
             .catch(e => {
                 reject(e)
             })
+    })
+}
+
+/**
+ * 通用GET请求，流程同smartbi()，内部使用axios.get
+ * @param url 请求地址
+ * @param config axios请求配置
+ * @param requireLogin 是否需要登录
+ */
+export const smartbiGet = <T = any>(
+    url: string,
+    config?: Parameters<typeof axios.get>[1],
+    requireLogin: boolean = __smartbi_env.mode === 'dev',
+): Promise<T> => {
+    return new Promise((resolve, reject) => {
+        ensureLogin(requireLogin)
+            .then(() => {
+                return axios.get(`${__smartbi_env.smartbiPath}/vision/${url}`, {
+                    headers: HEADERS,
+                    ...config,
+                })
+            })
+            .then(res => resolve(res as T))
+            .catch(e => reject(e))
+    })
+}
+/**
+ * 通用POST请求，流程同smartbi()，内部使用axios.post
+ * @param url 请求地址
+ * @param data 请求体数据
+ * @param config axios请求配置
+ * @param requireLogin 是否需要登录
+ */
+export const smartbiPost = <T = any>(
+    url: string,
+    data?: any,
+    config?: Parameters<typeof axios.post>[2],
+    requireLogin: boolean = __smartbi_env.mode === 'dev',
+): Promise<T> => {
+    return new Promise((resolve, reject) => {
+        ensureLogin(requireLogin)
+            .then(() => {
+                return axios.post(`${__smartbi_env.smartbiPath}/vision/${url}`, data, {
+                    headers: HEADERS,
+                    ...config,
+                })
+            })
+            .then(res => resolve(res as T))
+            .catch(e => reject(e))
     })
 }
 
