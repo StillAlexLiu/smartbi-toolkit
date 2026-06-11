@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {type AxiosResponse} from "axios";
 
 export type SmartbiDev = {
     username: string,
@@ -227,7 +227,7 @@ export const login = (form?: {
 /**
  * 心跳
  */
-export const noop = () => {
+export const noop = (): Promise<AxiosResponse> => {
     return axios.get(__smartbi_env.smartbiPath + '/vision/noop.jsp', {
         headers: HEADERS
     })
