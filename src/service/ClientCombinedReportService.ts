@@ -1,8 +1,5 @@
 // 导入公共类型
 import type { IClientCombinedReportView } from '../types';
-
-// ClientCombinedReportService 服务方法
-
 import {smartbi} from "../index";
 
 /**

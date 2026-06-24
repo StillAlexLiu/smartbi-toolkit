@@ -1,5 +1,6 @@
 // 导入公共类型
 import type {IResult, RunningInfo, IParameter, Parameter, NameValuePair, AllExportTypeMap} from '../types';
+import {smartbi} from "../index";
 
 /**
  * 打开多维报表
@@ -149,5 +150,3 @@ export const getParamStandbyValue = (clientId: string, paramId: string): Promise
 export const getExecutingState = (clientId: string): Promise<RunningInfo> => {
     return smartbi('AnalysisReportService', 'getExecutingState', [clientId])
 }
-
-import {smartbi} from "../index";

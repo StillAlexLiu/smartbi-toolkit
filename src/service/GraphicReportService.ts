@@ -1,6 +1,6 @@
 // 导入公共类型
-import {smartbi} from "../index";
 import type {GraphicReport} from "../types";
+import {smartbi} from "../index";
 
 /**
  * 打开图形分析报表

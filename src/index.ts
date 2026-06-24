@@ -49,7 +49,7 @@ type Status = 'pending' | 'online' | 'offline'
 type PostStack = () => void
 const smartbiInit = () => {
     const postList = new Set<PostStack>()
-    let timer: any = 0
+    let timer: ReturnType<typeof setInterval> | null = null
     let status: Status = 'offline'
 
     return {
@@ -60,7 +60,7 @@ const smartbiInit = () => {
             try {
                 clearInterval(timer)
             } catch (e) {
-                console.error(e)
+                console.error('Failed to stop heartbeat:', e)
             }
         },
         /**
@@ -150,13 +150,14 @@ export const smartbi = <T>(
                 if (res.data.retCode === 0) {
                     resolve(res.data.result)
                 } else {
-                    console.error('smartbi返回状态错误')
-                    console.error(res.data.stackTrace)
-                    reject(new Error(res.data.stackTrace))
+                    const errorMessage = `Smartbi RMI error in ${className}.${methodName}: ${res.data.stackTrace}`
+                    console.error(errorMessage)
+                    reject(new Error(errorMessage))
                 }
             })
             .catch(e => {
-                reject(e)
+                const errorMessage = `Smartbi request failed: ${e.message || e}`
+                reject(new Error(errorMessage))
             })
     })
 }

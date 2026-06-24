@@ -2,9 +2,8 @@ import {defineConfig} from 'tsdown'
 
 export default defineConfig({
     exports: true,
-    // ...config options
     dts: true,
-    fixedExtension:false,
+    fixedExtension: false,
     external: ['axios'],
     entry: [
         './src/index.ts',
@@ -12,4 +11,5 @@ export default defineConfig({
         './src/vite-plugin/vite-plugin-smartbix.ts',
         './src/service/*.ts'
     ],
+    clean: true,
 })

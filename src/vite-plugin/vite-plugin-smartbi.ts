@@ -21,20 +21,16 @@ export type VitePluginSmartbiOptions = {
     appendPath?: string,
 } & WebProjectConfig
 
-
 export const VitePluginSmartbi = (config: VitePluginSmartbiOptions): PluginOption => {
     const {output = 'web', appendPath, indexRename} = config;
-    console.log(appendPath)
+    info(`appendPath: ${appendPath || '未设置'}`)
     return {
         name: "vite-plugin-smartbi",
         apply: "build",
         enforce: "post",
         writeBundle(options, _bundle) {
             success('开始打包')
-            console.log(_bundle)
             const cwd = process.cwd();
-            // const {writeFile} = this.fs
-            // 创建ext目录
             const outputPath = join(cwd, output)
             const visionDir = resolve(outputPath, 'vision' + (appendPath ? ('/' + appendPath) : ''))
             const outputDir = options.dir as string
@@ -61,12 +57,10 @@ export const VitePluginSmartbi = (config: VitePluginSmartbiOptions): PluginOptio
                         return Promise.resolve()
                     }
                 }).then(() => {
-                exec('ant', {cwd: cwd}, (err: any, stdout: any, stderr: any) => {
+                exec('ant', {cwd: cwd}, (err: Error | null, stdout: string, stderr: string) => {
                     if (err) {
-
                         error(stderr)
                         error("构建失败：请检查是否有java和ant环境，搜索Apache Ant部署环境")
-                        this.error(stderr)
                     } else {
                         success(stdout)
                         success("ext构建完成")

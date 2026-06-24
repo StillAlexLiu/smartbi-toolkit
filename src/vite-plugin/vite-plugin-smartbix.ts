@@ -41,7 +41,6 @@ function getAllFiles(dirPath: string, arrayOfFiles: string[] = []) {
 
 export const vitePluginSmartbiX = (config: VitePluginSmartbiXOptions): PluginOption => {
     info("vitePluginSmartbiX")
-    console.log('vitePluginSmartbiX')
     const {
         libRoot = 'src/addExtenders',
         output = 'web'
@@ -51,7 +50,7 @@ export const vitePluginSmartbiX = (config: VitePluginSmartbiXOptions): PluginOpt
 
     const run = (ids?: string[]) => {
         makeWebDir(outputPath, config).then(() => {
-            console.log('创建完成')
+            info('创建完成')
             return pathExists(libRootPath)
         }).then(value => {
             if (value) {
@@ -66,7 +65,7 @@ export const vitePluginSmartbiX = (config: VitePluginSmartbiXOptions): PluginOpt
 
                     rollup({
                         input: id,
-                        external: ['vue'],  // 将vue设为外部依赖，防止打包进来
+                        external: ['vue'],
                         plugins: [
                             resolve({
                                 browser: true,
@@ -79,28 +78,29 @@ export const vitePluginSmartbiX = (config: VitePluginSmartbiXOptions): PluginOpt
                             terser()
                         ]
                     }).then(bundle => {
-                        bundle.write({
+                        return bundle.write({
                             dir: nodePath.join(output, 'vision/dist'),
                             format: 'system',
-                            name: name,  // 在write时明确指定name
+                            name: name,
                             sourcemap: true,
                             globals: {
                                 'vue': 'Vue',
                                 'axios': 'axios'
                             },
-                            entryFileNames: name + '.js'  // 确保输出到正确的路径和文件名
+                            entryFileNames: name + '.js'
                         }).finally(() => {
                             bundle.close()
                         })
-
+                    }).catch(err => {
+                        error(`编译失败: ${err.message || err}`)
                     })
-
-                    return null; // 返回null表示不对原始代码做转换
                 })
             } else {
                 error("请检查libRoot目录是否存在：" + libRoot)
             }
             success("编译完成")
+        }).catch(err => {
+            error(`构建失败: ${err.message || err}`)
         })
     }
     return {
@@ -114,11 +114,10 @@ export const vitePluginSmartbiX = (config: VitePluginSmartbiXOptions): PluginOpt
             success('开始打包')
             const cwd = process.cwd();
             info('ext输出路径：' + outputPath)
-            exec('ant', {cwd: cwd}, (err: any, stdout: any, stderr: any) => {
+            exec('ant', {cwd: cwd}, (err: Error | null, stdout: string, stderr: string) => {
                 if (err) {
                     error(stderr)
                     error("构建失败：请检查是否有java和ant环境，搜索Apache Ant部署环境")
-                    this.error(stderr)
                 } else {
                     success(stdout)
                     success("ext构建完成")
