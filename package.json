@@ -1,7 +1,7 @@
 {
   "name": "smartbi-toolkit",
   "type": "module",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "非官方smartbi开发工具包，集成了rmi调用，ext扩展包一键打包等功能",
   "author": "Alex Liu <648632561@qq.com>",
   "license": "MIT",
@@ -58,20 +58,20 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^25.2.0",
-    "bumpp": "^10.4.0",
-    "tsdown": "^0.20.1",
-    "typescript": "^5.9.3"
+    "@types/node": "^26.0.0",
+    "bumpp": "^11.1.0",
+    "tsdown": "^0.22.3",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "axios": "^1.13.4",
+    "@rollup/plugin-terser": "^1.0.0",
+    "axios": "^1.18.1",
     "chalk": "^5.6.2",
-    "fs-extra": "^11.3.3",
-    "rollup": "^4.57.1",
-    "rollup-plugin-vue": "^5.1.9",
-    "vite": "^7.3.1"
+    "fs-extra": "^11.3.5",
+    "rollup": "^4.62.2",
+    "rollup-plugin-vue": "^6.0.0",
+    "vite": "^8.1.0"
   }
 }
