@@ -49,7 +49,7 @@ type Status = 'pending' | 'online' | 'offline'
 type PostStack = () => void
 const smartbiInit = () => {
     const postList = new Set<PostStack>()
-    let timer: ReturnType<typeof setInterval> | null = null
+    let timer: NodeJS.Timeout
     let status: Status = 'offline'
 
     return {
@@ -58,7 +58,7 @@ const smartbiInit = () => {
          */
         stopHeatBeat() {
             try {
-                clearInterval(timer)
+                clearTimeout(timer)
             } catch (e) {
                 console.error('Failed to stop heartbeat:', e)
             }
