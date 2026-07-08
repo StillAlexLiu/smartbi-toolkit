@@ -68,7 +68,7 @@ const smartbiInit = () => {
          *
          */
         startHeatBeat() {
-            this.stopHeatBeat()
+            stopHeatBeat()
             timer = setInterval(() => {
                 if (status === 'online') {
                     noop().then(() => {
@@ -132,7 +132,7 @@ export {emit, on, ensureLogin, setStatus, getStatus, startHeatBeat, stopHeatBeat
 export const smartbi = <T>(
     className: string,
     methodName: string,
-    params: Array<string | number | boolean | null | undefined>,
+    params: Array<string | number | boolean | null | undefined | object | Record<string, any>>,
     requireLogin: boolean = __smartbi_env.mode === 'dev', // 开发环境需要登录，生产环境需要自行实现登录，或者在扩展包下进行
 ): Promise<T> => {
     return new Promise((resolve, reject) => {
